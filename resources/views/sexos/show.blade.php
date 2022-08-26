@@ -9,20 +9,24 @@
                 </a>
             </div>
         </div>
-        <div class="col-md-12">
-            <div class="card mx-auto" style="width: 50%;">
-              <div class="card-header">
-                Sexo
-              </div>
-              <div class="card-body text-center">
-                <h5 class="card-title"><b>{{$data->descripcion}}</b></h5>
-              </div>
-              <div class="card-header">
-                ID
-              </div>
-              <div class="card-body text-center">
-                <h5 class="card-title"><b>{{$data->cod_sexo}}</b></h5>
-              </div>
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">SEXO</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td scope="row">{{$data->cod_sexo}}</td>
+                        <td scope="row">{{$data->descripcion}}</td>
+                    </tr>
+                </tbody>
+            </table>
+           
+              
+                
             </div>
         </div>
     </div>
