@@ -17,7 +17,7 @@
                         
                         <tr>
                             <td class="text-center" width="20%">
-                                <a href="" class="btn btn-primary btn-sm shadow-none" 
+                                <a href="{{route('sexos.show',$sexo)}}" class="btn btn-primary btn-sm shadow-none" 
                                         data-toggle="tooltip" data-placement="top" title="Ver Sexo">
                                     <i class="fa fa-book fa-fw text-white"></i></a>
                                 </a>

@@ -49,7 +49,7 @@ class SexoController extends Controller
      */
     public function show(Sexo $sexo)
     {
-        //
+        return view('sexos.show', ['data'=>$sexo]);
     }
 
     /**
