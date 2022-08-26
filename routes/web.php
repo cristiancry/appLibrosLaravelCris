@@ -12,7 +12,8 @@ use App\Http\Controllers\SexoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [SexoController::class, 'index']);
+//Route::get('/', [SexoController::class, 'index']);
 /* Route::get('/', function () {
     return view('sexos.index');
 });*/
+Route::resource('sexos', SexoController::class);
