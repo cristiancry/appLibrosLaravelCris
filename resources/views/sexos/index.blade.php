@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="container">
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
@@ -11,6 +12,12 @@
     </div>
     </div>
     <div class="row">
+        @if (session()->has('message'))
+        <div class="alert alert-success">
+            {{session()->get('message')}}
+        </div>
+            
+        @endif
         <div class="col-md-12">
             <div class="table-responsive">
             
@@ -28,7 +35,7 @@
                         
                         <tr>
                             <td class="text-center" width="20%">
-                                <a href="{{route('sexos.show',$sexo)}}" class="btn btn-primary btn-sm shadow-none" 
+                                <a href="{{route('sexos.show',   $sexo  )}}" class="btn btn-primary btn-sm shadow-none" 
                                         data-toggle="tooltip" data-placement="top" title="Ver Sexo">
                                     <i class="fa fa-book fa-fw text-white"></i></a>
                                 </a>
@@ -54,6 +61,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 <!DOCTYPE html>
 <html lang="en">

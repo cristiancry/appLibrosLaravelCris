@@ -38,7 +38,12 @@ class SexoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'descripcion'=>'required|min:3|max:100|unique:lib_sexo'
+        ]);
+        Sexo::create($request->all());
+        
+        return redirect()->route('sexos.index')->with('message', 'Sexo creado exitosamente');
     }
 
     /**

@@ -1,17 +1,17 @@
-.col-md-6{
+#form-campo{
     background-color: rgba(109, 149, 184, 0.541);
-    width: 100%;
-    max-width: 500px;
+    
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
+    padding-bottom: 10px; 
+    font-family: 'Times New Roman', Times, serif;
 }
-.col-md-11{
-    margin: 0 auto;
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
+
+ 
+#botonhome{
+    margin-bottom: 1em;
 }

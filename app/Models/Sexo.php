@@ -12,4 +12,5 @@ class Sexo extends Model
     protected $table = 'lib_sexo';
     protected $primaryKey = 'cod_sexo';
     protected $fillable = ['descripcion'];
+    public $timestamps= false;
 }
