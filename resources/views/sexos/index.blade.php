@@ -1,8 +1,19 @@
 @extends('layouts.app')
+
 @section('content')
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-right">
+            <a class="btn btn-primary shadow-none" data-toggle="tooltip" data-placement="top" title="Agregar Sexo" href="{{route('sexos.create')}}"> 
+                <i class="fa fa-plus"></i>
+            </a>
+        </div>
+    </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <div class="table-responsive">
+            
                 <table class="table table-hover">
                     <thead>
                     <tr>

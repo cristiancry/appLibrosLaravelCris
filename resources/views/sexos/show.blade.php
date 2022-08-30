@@ -9,7 +9,7 @@
                 </a>
             </div>
         </div>
-        <div class="table-responsive">
+        <div clss="table-responsive">
             <table class="table table-hover">
                 <thead>
                     <tr>

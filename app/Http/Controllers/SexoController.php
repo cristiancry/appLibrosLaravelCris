@@ -27,7 +27,7 @@ class SexoController extends Controller
      */
     public function create()
     {
-        //
+        return view('sexos.create');
     }
 
     /**

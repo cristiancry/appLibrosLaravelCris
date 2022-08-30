@@ -37,7 +37,7 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                        <li class="navbar-item">
-                        <a class="nav-link" href="">Sexos</a>
+                        <a class="nav-link" href="{{route("sexos.index")}}">Sexos</a>
                         </li>
                     </ul>
                 </div>
