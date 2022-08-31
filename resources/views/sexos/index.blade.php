@@ -39,11 +39,13 @@
                                         data-toggle="tooltip" data-placement="top" title="Ver Sexo">
                                     <i class="fa fa-book fa-fw text-white"></i></a>
                                 </a>
-                                <a href="" class="btn btn-success btn-sm shadow-none" 
+                                <a href="{{route('sexos.edit', $sexo)}}" class="btn btn-success btn-sm shadow-none" 
                                         data-toggle="tooltip" data-placement="top" title="Editar Sexo">
                                     <i class="fa fa-pencil fa-fw text-white"></i></a>
                                 </a>
-                                <form action="" method="POST" class="d-inline-block">
+                                <form action="{{route('sexos.destroy', $sexo)}}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    @method('DELETE')
                                     <button id="delete" name="delete" type="submit" 
                                             class="btn btn-danger btn-sm shadow-none" 
                                             data-toggle="tooltip" data-placement="top" title="Eliminar Sexo"

@@ -65,7 +65,7 @@ class SexoController extends Controller
      */
     public function edit(Sexo $sexo)
     {
-        //
+        return view('sexos.edit', ['sexo'=>$sexo]);
     }
 
     /**
@@ -77,7 +77,13 @@ class SexoController extends Controller
      */
     public function update(Request $request, Sexo $sexo)
     {
-        //
+        $request->validate([
+            'descripcion'=>'required|min:3|max:100|unique:lib_sexo'
+        ]);
+        $sexo->update($request->all());
+        
+        //return redirect()->route('sexos.index')->with('message', 'Sexo actualizado exitosamente');
+        return back()->with('message','Sexo actualizado exitosamente');
     }
 
     /**
@@ -88,6 +94,7 @@ class SexoController extends Controller
      */
     public function destroy(Sexo $sexo)
     {
-        //
+        $sexo->delete();
+        return redirect()->route('sexos.index')->with('message', 'Sexo eliminado exitosamente');
     }
 }

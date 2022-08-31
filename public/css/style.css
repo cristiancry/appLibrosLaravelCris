@@ -15,3 +15,8 @@
 #botonhome{
     margin-bottom: 1em;
 }
+.form-label-des{
+    text-justify: auto;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: small;
+}
