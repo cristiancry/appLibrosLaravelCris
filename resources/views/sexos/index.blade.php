@@ -1,6 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
+<div class="row">
+    @if (session()->has('message'))
+    <div class="container mt-3">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  
+        {{session()->get('message')}}
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+</div>
+    @endif
 <div class="container">
 <div class="row">
     <div class="col-md-12">
@@ -11,14 +21,9 @@
         </div>
     </div>
     </div>
-    <div class="row">
-        @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{session()->get('message')}}
-        </div>
-            
-        @endif
+    
         <div class="col-md-12">
+            @if(sizeof($data)>0)
             <div class="table-responsive">
             
                 <table class="table table-hover">
@@ -30,6 +35,9 @@
                     </tr>
                     </thead>
                     <tbody>
+                        
+                            
+                       
                         @foreach ($data as $sexo )
                             
                         
@@ -60,7 +68,14 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center">
+                {!! $data->links() !!}
             </div>
+            
+            </div>
+            @else
+            <div class="alert alert-secondary">No se encontraron resutlados.</div>
+            @endif
         </div>
     </div>
 </div>

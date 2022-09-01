@@ -16,7 +16,11 @@
     margin-bottom: 1em;
 }
 .form-label-des{
-    text-justify: auto;
+    text-align: justify;
     font-family: 'Times New Roman', Times, serif;
     font-size: small;
 }
+/*div .pagination{
+    margin-top: 50px;
+    padding-top: 50px;
+}*/

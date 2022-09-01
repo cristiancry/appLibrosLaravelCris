@@ -13,12 +13,25 @@
 </div>
 </div>
 @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{session()->get('message')}}
-        </div>
-            
-        @endif
-
+    <div class="container mt-3">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  
+        {{session()->get('message')}}
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+</div>
+    @else
+    @error('descripcion')
+    <div class="container mt-3">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    
+          {{$message}}
+          <button class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+  </div>
+  @enderror
+    @endif
+<div class="container mt-3">
 <div class="col-md-12" >
     <form  action="{{route('sexos.update', $sexo)}}" method="POST" class="row g-3">
         @csrf
@@ -28,16 +41,17 @@
           <label for="descripcion" class="form-label-des">Antigua Descripcion</label>
           <label for="descripcion" class="form-label-des">{{$sexo->descripcion}}</label>
           <input type="text" class="form-control shadow-none" id="descripcion" name="descripcion" value="{{$sexo->descripcion}}">
-          @error('descripcion')
+          <!--@error('descripcion')
               <small class="text-danger">
                 {{$message}}
               </small>
-          @enderror
+          @enderror-->
         </div>
         <div class="col-md-12" id="form-campo">
           <button type="submit" class="btn btn-primary">Actualizar</button>
         </div>
       </form>
+</div>
 </div>
 </div>
 

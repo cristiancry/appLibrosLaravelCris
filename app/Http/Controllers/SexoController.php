@@ -14,7 +14,7 @@ class SexoController extends Controller
      */
     public function index()
     {
-        $sexos = Sexo::orderBy('cod_sexo', 'ASC')->get();
+        $sexos = Sexo::orderBy('cod_sexo', 'ASC')->paginate(5);
     
 
         return view('sexos.index', ['data' => $sexos]);
@@ -43,7 +43,9 @@ class SexoController extends Controller
         ]);
         Sexo::create($request->all());
         
-        return redirect()->route('sexos.index')->with('message', 'Sexo creado exitosamente');
+        return redirect()
+        ->route('sexos.index')
+        ->with('message', 'Sexo creado exitosamente');
     }
 
     /**

@@ -10,6 +10,17 @@
         <i class="fa fa-home fa-fw" id="botonhome"></i>
         </a>
     </div>
+    
+    @error('descripcion')
+    <div class="container mt-3">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    
+          {{$message}}
+          <button class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+  </div>
+  @enderror
+    
 </div>
 </div>
 <div class="col-md-12" >
@@ -18,11 +29,11 @@
         <div class="col-md-12" id="form-campo" >
           <label for="descripcion" class="form-label">Descripción de Sexo</label>
           <input type="text" class="form-control shadow-none" id="descripcion" name="descripcion" value="">
-          @error('descripcion')
+          <!--@error('descripcion')
               <small class="text-danger">
                 {{$message}}
               </small>
-          @enderror
+          @enderror-->
         </div>
         <div class="col-md-12" id="form-campo">
           <button type="submit" class="btn btn-primary">Guardar</button>
