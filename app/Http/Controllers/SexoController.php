@@ -80,8 +80,14 @@ class SexoController extends Controller
     public function update(Request $request, Sexo $sexo)
     {
         $request->validate([
-            'descripcion'=>'required|min:3|max:100|unique:lib_sexo'
+            'descripcion'=>'required|min:3|max:100|unique:lib_sexo,descripcion,'.$sexo->cod_sexo.',cod_sexo'
         ]);
+        $sexo->fill($request->only([ //sacar la descripcion actual ingresada del objeto sexo
+            'descripcion'
+        ]));
+        if($sexo->isClean()){   // revisar si lo ingresado no tuvo algun cambio
+            return back()->with('mensajedeadvertencia','debe realizar al menos un cambio para al menos actualizar');
+        }
         $sexo->update($request->all());
         
         //return redirect()->route('sexos.index')->with('message', 'Sexo actualizado exitosamente');

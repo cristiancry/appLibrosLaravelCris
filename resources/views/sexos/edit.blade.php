@@ -1,6 +1,33 @@
 @extends('layouts.app')
 
 @section('content')
+@if (session()->has('message'))
+    <div class="container mt-3">
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+  
+        {{session()->get('message')}}
+        <button class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+</div>
+@endif
+    @if (session()->has('mensajedeadvertencia'))
+    <div class="container mt-3">
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    
+          {{session()->get('mensajedeadvertencia')}}
+          <button class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+  </div>
+    @endif
+    @error('descripcion')
+    <div class="container mt-3">
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    
+          {{$message}}
+          <button class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+  </div>
+  @enderror
 <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
 <div class="container">
 <div class="row">
@@ -12,25 +39,8 @@
     </div>
 </div>
 </div>
-@if (session()->has('message'))
-    <div class="container mt-3">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-  
-        {{session()->get('message')}}
-        <button class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-</div>
-    @else
-    @error('descripcion')
-    <div class="container mt-3">
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+
     
-          {{$message}}
-          <button class="btn-close" data-bs-dismiss="alert"></button>
-      </div>
-  </div>
-  @enderror
-    @endif
 <div class="container mt-3">
 <div class="col-md-12" >
     <form  action="{{route('sexos.update', $sexo)}}" method="POST" class="row g-3">
@@ -40,7 +50,7 @@
           <label for="descripcion" class="form-label">Actualizacion de Sexo</label>
           <label for="descripcion" class="form-label-des">Antigua Descripcion</label>
           <label for="descripcion" class="form-label-des">{{$sexo->descripcion}}</label>
-          <input type="text" class="form-control shadow-none" id="descripcion" name="descripcion" value="{{$sexo->descripcion}}">
+          <input type="text" class="form-control shadow-none" id="descripcion" name="descripcion" value="{{old('descripcion', $sexo->descripcion)}}">
           <!--@error('descripcion')
               <small class="text-danger">
                 {{$message}}
