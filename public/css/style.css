@@ -24,3 +24,11 @@
     margin-top: 50px;
     padding-top: 50px;
 }*/
+.imagen{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border-radius: 8px;
+    vertical-align: text-bottom; 
+}

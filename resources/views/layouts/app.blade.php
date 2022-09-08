@@ -39,6 +39,12 @@
                        <li class="navbar-item">
                         <a class="nav-link" href="{{route("sexos.index")}}">Sexos</a>
                         </li>
+                        <li class="navbar-item">
+                            <a class="nav-link" href="{{route("idiomas.index")}}">Idiomas</a>
+                            </li>
+                        <li class="navbar-item">
+                            <a class="nav-link" href="{{route("categorias.index")}}">Categorias</a>
+                        </li>
                     </ul>
                 </div>
             </div>

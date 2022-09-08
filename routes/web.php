@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SexoController;
+use App\Http\Controllers\IdiomaController;
+use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,8 +15,11 @@ use App\Http\Controllers\SexoController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', [SexoController::class, 'index']);
+Route::get('/', [HomeController::class, 'index']);
  /*Route::get('/', function () {
     return view('sexos.index');
 });*/
 Route::resource('sexos', SexoController::class);
+Route::resource('idiomas', IdiomaController::class);
+Route::resource('categorias', CategoriaController::class);
+Route::resource('homes', HomeController::class);
