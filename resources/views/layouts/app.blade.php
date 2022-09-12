@@ -45,6 +45,9 @@
                         <li class="navbar-item">
                             <a class="nav-link" href="{{route("categorias.index")}}">Categorias</a>
                         </li>
+                        <li class="navbar-item">
+                            <a class="nav-link" href="{{route("autores.index")}}">Autores</a>
+                        </li>
                     </ul>
                 </div>
             </div>

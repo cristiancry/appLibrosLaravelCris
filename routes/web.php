@@ -5,6 +5,7 @@ use App\Http\Controllers\SexoController;
 use App\Http\Controllers\IdiomaController;
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AutorController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +24,6 @@ Route::resource('sexos', SexoController::class);
 Route::resource('idiomas', IdiomaController::class);
 Route::resource('categorias', CategoriaController::class);
 Route::resource('homes', HomeController::class);
+Route::resource('autores', AutorController::class)->parameters([
+    'autores' => 'autor'
+]);
