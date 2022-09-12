@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Idioma;
 use Illuminate\Http\Request;
 
 class IdiomaController extends Controller
@@ -13,7 +14,8 @@ class IdiomaController extends Controller
      */
     public function index()
     {
-        //
+        $idioma = Idioma::orderBy('cod_idioma', 'ASC')->paginate(5);
+        return view('idiomas.index', ['idioma' => $idioma]);
     }
 
     /**
@@ -23,7 +25,7 @@ class IdiomaController extends Controller
      */
     public function create()
     {
-        //
+        return view('idiomas.create');
     }
 
     /**
@@ -34,7 +36,13 @@ class IdiomaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'descripcion'=>'required|min:3|max:100|unique:lib_idioma'
+        ]);
+        Idioma::create($request->all());
+        return redirect()
+        ->route('idiomas.index')
+        ->with('message','Idioma creado exitosamente');
     }
 
     /**
@@ -43,9 +51,9 @@ class IdiomaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Idioma $idioma)
     {
-        //
+        return view('idiomas.show', ['idiomasa'=>$idioma]);
     }
 
     /**
@@ -54,9 +62,9 @@ class IdiomaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Idioma $idioma)
     {
-        //
+        return view('idiomas.edit', ['idiomas'=>$idioma]);
     }
 
     /**
@@ -66,9 +74,21 @@ class IdiomaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Idioma $idioma)
     {
-        //
+        $request->validate([
+            'descripcion'=>'required|min:3|max:100|unique:lib_idioma,descripcion,'.$idioma->cod_idioma.',cod_idioma'
+        ]);
+        $idioma->fill($request->only([ //sacar la descripcion actual ingresada del objeto idioma
+            'descripcion'
+        ]));
+        if($idioma->isClean()){   // revisar si lo ingresado no tuvo algun cambio
+            return back()->with('mensajedeadvertencia','debe realizar al menos un cambio para al menos actualizar');
+        }
+        $idioma->update($request->all());
+        
+        
+        return back()->with('message','Idioma actualizado exitosamente');
     }
 
     /**
@@ -77,8 +97,9 @@ class IdiomaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Idioma $idioma)
     {
-        //
+        $idioma->delete();
+        return redirect()->route('idiomas.index')->with('message', 'Idioma eliminado exitosamente');
     }
 }

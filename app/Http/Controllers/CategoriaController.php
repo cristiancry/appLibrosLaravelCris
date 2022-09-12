@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use Illuminate\Http\Request;
 
 class CategoriaController extends Controller
@@ -13,7 +14,8 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        //
+        $categorias = Categoria::orderBy('cod_categoria', 'ASC')->paginate(5);
+        return view('categorias.index', ['data' => $categorias]);
     }
 
     /**
@@ -23,7 +25,7 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        //
+        return view('categorias.create');
     }
 
     /**
@@ -34,7 +36,13 @@ class CategoriaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'titulo'=>'required|min:3|max:100|unique:lib_categoria'
+        ]);
+        Categoria::create($request->all());
+        return redirect()
+        ->route('categorias.index')
+        ->with('message', 'Categoria creada exitosamente');
     }
 
     /**
@@ -43,9 +51,9 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Categoria $categoria)
     {
-        //
+        return view('categorias.show', ['data'=>$categoria]);
     }
 
     /**
@@ -54,9 +62,9 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Categoria $categoria)
     {
-        //
+        return view('categorias.edit', ['categoria'=>$categoria]);
     }
 
     /**
@@ -66,9 +74,21 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Categoria $categoria)
     {
-        //
+        $request->validate([
+            'titulo'=>'required|min:3|max:100|unique:lib_categoria,titulo,'.$categoria->cod_categoria.',cod_categoria'
+        ]);
+        $categoria->fill($request->only([ //sacar el titulo actual ingresada del objeto   categoria
+            'titulo'
+        ]));
+        if($categoria->isClean()){   // revisar si lo ingresado no tuvo algun cambio
+            return back()->with('mensajedeadvertencia','debe realizar al menos un cambio para al menos actualizar');
+        }
+        $categoria->update($request->all());
+        
+        //return redirect()->route('categorias.index')->with('message', 'Categoria actualizado exitosamente');
+        return back()->with('message','Categoria actualizada exitosamente');
     }
 
     /**
@@ -77,8 +97,9 @@ class CategoriaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Categoria $categoria)
     {
-        //
+        $categoria->delete();
+        return redirect()->route('categorias.index')->with('message', 'Categoria eliminada exitosamente');
     }
 }

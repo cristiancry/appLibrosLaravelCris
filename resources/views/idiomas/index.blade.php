@@ -15,7 +15,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
-            <a class="btn btn-primary shadow-none" data-toggle="tooltip" data-placement="top" title="Agregar Idioma" href="{{route('sexos.create')}}"> 
+            <a class="btn btn-primary shadow-none" data-toggle="tooltip" data-placement="top" title="Agregar Idioma" href="{{route('idiomas.create')}}"> 
                 <i class="fa fa-plus"></i>
             </a>
         </div>
@@ -23,7 +23,7 @@
     </div>
     
         <div class="col-md-12">
-            @if(sizeof($data)>0)
+            @if(sizeof($idioma)>0)<!--paginacion inicio-->
             <div class="table-responsive">
             
                 <table class="table table-hover">
@@ -38,38 +38,38 @@
                         
                             
                        
-                        @foreach ($data as $sexo )
+                        @foreach ($idioma as $idiomas )
                             
                         
                         <tr>
                             <td class="text-center" width="20%">
-                                <a href="{{route('sexos.show',   $sexo  )}}" class="btn btn-primary btn-sm shadow-none" 
-                                        data-toggle="tooltip" data-placement="top" title="Ver Sexo">
+                                <a href="{{route('idiomas.show',   $idiomas  )}}" class="btn btn-primary btn-sm shadow-none" 
+                                        data-toggle="tooltip" data-placement="top" title="Ver Idioma">
                                     <i class="fa fa-book fa-fw text-white"></i></a>
                                 </a>
-                                <a href="{{route('sexos.edit', $sexo)}}" class="btn btn-success btn-sm shadow-none" 
-                                        data-toggle="tooltip" data-placement="top" title="Editar Sexo">
+                                <a href="{{route('idiomas.edit', $idiomas)}}" class="btn btn-success btn-sm shadow-none" 
+                                        data-toggle="tooltip" data-placement="top" title="Editar Idioma">
                                     <i class="fa fa-pencil fa-fw text-white"></i></a>
                                 </a>
-                                <form action="{{route('sexos.destroy', $sexo)}}" method="POST" class="d-inline-block">
+                                <form action="{{route('idiomas.destroy', $idiomas)}}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button id="delete" name="delete" type="submit" 
                                             class="btn btn-danger btn-sm shadow-none" 
-                                            data-toggle="tooltip" data-placement="top" title="Eliminar Sexo"
+                                            data-toggle="tooltip" data-placement="top" title="Eliminar Idioma"
                                             onclick="return confirm('¿Estás seguro de eliminar?')">
                                         <i class="fa fa-trash-o fa-fw"></i>
                                     </button>
                                 </form>
                             </td>
-                            <td scope="row">{{$sexo->cod_sexo}}</td>
-                            <td scope="row">{{$sexo->descripcion}}</td>
+                            <td scope="row">{{$idiomas->cod_idiomas}}</td>
+                            <td scope="row">{{$idiomas->descripcion}}</td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
                 <div class="d-flex justify-content-center">
-                {!! $data->links() !!}
+                {!! $idioma->links() !!} <!--paginacion fin-->
             </div>
             
             </div>
