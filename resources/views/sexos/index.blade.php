@@ -2,14 +2,23 @@
 
 @section('content')
 <div class="row">
-    @if (session()->has('message'))
+    @if (session()->has('success'))
     <div class="container mt-3">
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
   
-        {{session()->get('message')}}
-        <button class="btn-close" data-bs-dismiss="alert"></button>
+             {{session()->get('success')}}
+                <button class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
     </div>
-</div>
+    @endif
+    @if (session()->has('danger'))
+    <div class="container mt-3">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+  
+             {{session()->get('danger')}}
+                <button class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
     @endif
 <div class="container">
 <div class="row">

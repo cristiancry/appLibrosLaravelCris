@@ -45,7 +45,7 @@ class SexoController extends Controller
         
         return redirect()
         ->route('sexos.index')
-        ->with('message', 'Sexo creado exitosamente');
+        ->with('success', 'Sexo creado exitosamente');
     }
 
     /**
@@ -86,12 +86,12 @@ class SexoController extends Controller
             'descripcion'
         ]));
         if($sexo->isClean()){   // revisar si lo ingresado no tuvo algun cambio
-            return back()->with('mensajedeadvertencia','debe realizar al menos un cambio para al menos actualizar');
+            return back()->with('warning','debe realizar al menos un cambio para al menos actualizar');
         }
         $sexo->update($request->all());
         
         //return redirect()->route('sexos.index')->with('message', 'Sexo actualizado exitosamente');
-        return back()->with('message','Sexo actualizado exitosamente');
+        return back()->with('success','Sexo actualizado exitosamente');
     }
 
     /**
@@ -103,6 +103,6 @@ class SexoController extends Controller
     public function destroy(Sexo $sexo)
     {
         $sexo->delete();
-        return redirect()->route('sexos.index')->with('message', 'Sexo eliminado exitosamente');
+        return redirect()->route('sexos.index')->with('danger', 'Sexo eliminado exitosamente');
     }
 }

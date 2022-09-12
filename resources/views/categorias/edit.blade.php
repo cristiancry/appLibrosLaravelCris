@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-@if (session()->has('message'))
+@if (session()->has('success'))
     <div class="container mt-3">
     <div class="alert alert-success alert-dismissible fade show" role="alert">
   
-        {{session()->get('message')}}
+        {{session()->get('success')}}
         <button class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 </div>
 @endif
-    @if (session()->has('mensajedeadvertencia'))
+    @if (session()->has('warning'))
     <div class="container mt-3">
       <div class="alert alert-warning alert-dismissible fade show" role="alert">
     
-          {{session()->get('mensajedeadvertencia')}}
+          {{session()->get('warning')}}
           <button class="btn-close" data-bs-dismiss="alert"></button>
       </div>
   </div>

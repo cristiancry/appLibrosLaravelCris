@@ -42,7 +42,7 @@ class CategoriaController extends Controller
         Categoria::create($request->all());
         return redirect()
         ->route('categorias.index')
-        ->with('message', 'Categoria creada exitosamente');
+        ->with('success', 'Categoria creada exitosamente');
     }
 
     /**
@@ -83,12 +83,12 @@ class CategoriaController extends Controller
             'titulo'
         ]));
         if($categoria->isClean()){   // revisar si lo ingresado no tuvo algun cambio
-            return back()->with('mensajedeadvertencia','debe realizar al menos un cambio para al menos actualizar');
+            return back()->with('warning','debe realizar al menos un cambio para al menos actualizar');
         }
         $categoria->update($request->all());
         
         //return redirect()->route('categorias.index')->with('message', 'Categoria actualizado exitosamente');
-        return back()->with('message','Categoria actualizada exitosamente');
+        return back()->with('success','Categoria actualizada exitosamente');
     }
 
     /**
@@ -100,6 +100,6 @@ class CategoriaController extends Controller
     public function destroy(Categoria $categoria)
     {
         $categoria->delete();
-        return redirect()->route('categorias.index')->with('message', 'Categoria eliminada exitosamente');
+        return redirect()->route('categorias.index')->with('danger', 'Categoria eliminada exitosamente');
     }
 }
