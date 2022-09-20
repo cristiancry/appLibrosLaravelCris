@@ -76,7 +76,13 @@
                             <td scope="row">{{$autor->cod_autor}}</td>
                             <td scope="row">{{$autor->nombres}}</td>
                             <td scope="row">{{$autor->apellidos}}</td>
-                            <td scope="row">{{$autor->cod_sexo}}</td>
+                            <td scope="row">{{
+                                    $autor->cod_sexo 
+                                    ? 
+                                    $autor->sexo->descripcion
+                                    :'no se asigno un sexo'
+
+                                            }}</td>
                         </tr>
                         @endforeach
                     </tbody>

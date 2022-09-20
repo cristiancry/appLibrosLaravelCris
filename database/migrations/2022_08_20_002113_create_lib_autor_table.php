@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('lib_autor', function (Blueprint $table) {
             $table->increments('cod_autor');
-            $table->string('nombres',100);
+            $table->string('nombres',100)->nullable();
             $table->string('apellidos',100);
             $table->string('nombrecompleto',200);
-            $table->unsignedInteger('cod_sexo')->nullable;
+            $table->unsignedInteger('cod_sexo')->nullable();
             $table->foreign('cod_sexo')->references('cod_sexo')->on('lib_sexo');
 
         });

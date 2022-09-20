@@ -10,7 +10,7 @@ class Autor extends Model
     use HasFactory;
     protected $table = 'lib_autor';
     protected $primaryKey = 'cod_autor';
-    protected $fillable = ['nombres, apellidos, nombrecompleto, cod_sexo'];
+    protected $fillable = ['nombres', 'apellidos', 'nombrecompleto', 'cod_sexo'];
     public $timestamps= false;
     //descripcion  derelacion de el lado de muchos a 1, 1 autor puede pertenecer a 1 solo sexo
     public function sexo()

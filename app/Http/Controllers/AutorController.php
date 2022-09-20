@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Autor;
+use App\Models\Sexo;
 use Illuminate\Http\Request;
 
 class AutorController extends Controller
@@ -27,7 +28,8 @@ class AutorController extends Controller
      */
     public function create()
     {
-        //
+        $sexos=Sexo::all();
+        return view('autores.create',['sexos'=>$sexos]);
     }
 
     /**
@@ -38,7 +40,19 @@ class AutorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+         $request->validate([
+            'nombres'=>'required|min:3|max:100',
+            'apellidos'=>'required|min:3|max:100',
+            /* 'cod_sexo'=>'required', */
+            
+        ]);
+         $request['nombrecompleto']=$request->nombres."".$request->apellidos;
+        Autor::create($request->all());
+        
+        return redirect()
+        ->route('autores.index')
+        ->with('success', 'Autor creado exitosamente');
     }
 
     /**
@@ -60,7 +74,8 @@ class AutorController extends Controller
      */
     public function edit(Autor $autor)
     {
-        //
+        $sexos=Sexo::all();
+        return view('autores.edit',['autor'=>$autor,'sexos'=>$sexos]);
     }
 
     /**
@@ -72,7 +87,25 @@ class AutorController extends Controller
      */
     public function update(Request $request, Autor $autor)
     {
-        //
+        $request->validate([
+            'nombres'=>'required|min:3|max:100',
+            'apellidos'=>'required|min:3|max:100',
+            /* 'cod_sexo'=>'required', */
+            
+        ]);
+        $autor->fill($request->only([
+                'nombres',
+                'apellidos',
+                'cod_sexo',
+        ]));
+        if($autor->isClean()){   // revisar si lo ingresado no tuvo algun cambio
+            return back()->with('warning','debe realizar al menos un cambio para al menos actualizar');
+        }
+        $request['nombrecompleto']=$request->nombres."".$request->apellidos;
+        $autor->update($request->all());
+        
+        //return redirect()->route('sexos.index')->with('message', 'Sexo actualizado exitosamente');
+        return back()->with('success','Autor actualizado exitosamente');
     }
 
     /**

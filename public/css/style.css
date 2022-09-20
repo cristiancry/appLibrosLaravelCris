@@ -32,3 +32,29 @@
     border-radius: 8px;
     vertical-align: text-bottom; 
 }
+.contenido-medio{
+    margin-top:30px;
+  }
+  .card-header{
+    background: #34515E;
+  }
+  .card-footer{
+    background: #34515E;
+  }
+  .input-group-text{
+    background: #34515E;
+  }
+  
+  .d-flex{
+    margin-top:30px;
+  }
+  #formu{
+    margin-bottom: 20px;
+    border-radius: 10px;
+   }
+   .form-control{
+    border-radius: 100px;
+   }
+   .input-group-prepend{
+    border-radius: 10px;
+   }
