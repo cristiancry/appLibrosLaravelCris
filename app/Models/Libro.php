@@ -10,7 +10,7 @@ class Libro extends Model
     use HasFactory;
     protected $table='lib_libro';
     protected $primaryKey = 'cod_libro';
-    protected $fillable = ['titulo','descripcion', 'fecha publicacion', 'cod_idioma'];
+    protected $fillable = ['titulo','descripcion', 'fecha_publicacion', 'cod_idioma'];
     public $timestamps= false;
     public function idioma()
     {

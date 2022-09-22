@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Libro;
+use App\Models\Idioma;
 
 class LibroController extends Controller
 {
@@ -25,7 +26,8 @@ class LibroController extends Controller
      */
     public function create()
     {
-        //
+        $idiomas=Idioma::all();
+        return view('libros.create',['idiomas'=>$idiomas]);
     }
 
     /**
@@ -36,7 +38,20 @@ class LibroController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $actual=Carbon::now();
+        $request->validate([
+            'titulo'=>'required|min:3|max:100|unique:lib_libro',
+            'descripcion'=>'required|min:3|max:200',
+            'fecha_publicacion'=>'required|date|before_or_equal:'. $actual.'',
+            /* 'cod_sexo'=>'required', */
+            
+        ]);
+         
+        Libro::create($request->all());
+        
+        return redirect()
+        ->route('libros.index')
+        ->with('success', 'Libro creado exitosamente');
     }
 
     /**
@@ -56,9 +71,10 @@ class LibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Libro $libro)
     {
-        //
+        $idiomas=Idioma::all();
+        return view('libros.edit',['libro'=>$libro,'idiomas'=>$idiomas]);
     }
 
     /**
@@ -68,9 +84,31 @@ class LibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Libro $libro)
     {
-        //
+        $actual=Carbon::now();
+        $request->validate([
+            'titulo'=>'required|min:3|max:100|unique:lib_libro,titulo,'.$libro->cod_libro. ',cod_libro',
+            'descripcion'=>'required|min:3|max:200',
+            'fecha_publicacion'=>'required|date',
+            
+            /* 'cod_sexo'=>'required', */
+            
+        ]);
+        $libro->fill($request->only([
+                'titulo',
+                'descripcion',
+                'fecha_publicacion',
+                'cod_idioma',
+        ]));
+        if($libro->isClean()){   // revisar si lo ingresado no tuvo algun cambio
+            return back()->with('warning','debe realizar al menos un cambio para al menos actualizar');
+        }
+        
+        $libro->update($request->all());
+        
+        //return redirect()->route('sexos.index')->with('message', 'Sexo actualizado exitosamente');
+        return back()->with('success','libro actualizado exitosamente');
     }
 
     /**
@@ -79,8 +117,9 @@ class LibroController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Libro $libro)
     {
-        //
+        $libro->delete();
+        return redirect()->route('libros.index')->with('danger', 'libro eliminado exitosamente');
     }
 }

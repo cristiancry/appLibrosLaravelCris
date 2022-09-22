@@ -3,7 +3,7 @@
 @section('content')
 <link href="{{ asset('/css/style.css') }}" rel="stylesheet">
 <div class="container">
-  @error('descripcion')
+ {{--  @error('descripcion')
     <div class="container mt-3">
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
     
@@ -11,7 +11,7 @@
           <button class="btn-close" data-bs-dismiss="alert"></button>
       </div>
   </div>
-  @enderror
+  @enderror --}}
 <div class="row">
     <div class="col-md-12">
     <div class="pull-right">
@@ -27,60 +27,84 @@
 					<div class="card">
 					  <!--cabeza del formulario-->	
 						<div class="card-header bg-success text-white">
-							<h3>Registro Autores</h3>
+							<h3>Registro de Libros</h3>
 						</div> 
 					  <!--fin de cabeza-->
 					  <!--Inicio cuerpo de formulario-->	   
 						  <div class="card-body bg-primary">
 					
-							<form class="form-group" method="POST" action={{route('autores.store')}}>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          	 
+							<form class="form-group" method="POST" action={{route('libros.store')}}>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          	 
 								@csrf
-								{{-- nombres --}}
+								{{-- titulo --}}
+								<div>
+										
+									@error('titulo')
+									<small class="text-danger" role="alert">
+										{{ $message }}
+									</small>
+								@enderror</div>
 								<div class="input-group form-group" id="formu">
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fa fa-user"></i></span>
 									</div>
-									<input type="text" class="form-control" placeholder="nombres" name="nombres"  value="{{ old('nombres') }}"> 
-									@error('nombres')
+									<input type="text" class="form-control" placeholder="titulo" 
+									name="titulo"  value="{{ old('titulo') }}"> 
+									
+								</div>
+								
+								{{-- descripcion --}}
+								<div >@error('descripcion')
 									<small class="text-danger" role="alert">
 										{{ $message }}
 									</small>
-								@enderror
-								</div>
-								{{-- apellidos --}}
+								@enderror</div>
 								<div class="input-group form-group" id="formu">
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fas fa-user"></i></span>
 									</div>
-									<input type="text" class="form-control" placeholder="apellidos" name="apellidos" value="{{ old('apellidos') }}">
-									@error('apellidos')
+									<textarea class="form-control shadow-none" style="border-radius: 0%" placeholder="Descripcion...." name="descripcion" id="descripcion" cols="30" rows="5" value="">{{ old('descripcion') }}</textarea>
+									
+								</div>
+								{{-- fecha de publicacion --}}
+								<div>
+									@error('fecha_publicacion')
 									<small class="text-danger" role="alert">
 										{{ $message }}
 									</small>
 								@enderror
 								</div>
+								<div class="input-group form-group" id="formu">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><i class="fas fa-user"></i></span>
+									</div>
+									<input type="date" class="form-control" placeholder="fecha_publicacion" name="fecha_publicacion" value="{{ old('fecha_publicacion') }}">
+									
+								</div>
 								
 								
-								{{-- seleccionar sexo --}}
+								{{-- seleccionar idioma --}}
+								<div>
+									@error('cod_idioma')
+									<small class="text-danger" role="alert">
+										Seleccione un idioma
+									</small>
+								@enderror
+								</div>
 								<div class="input-group form-group" id="formu">
 									<div class="input-group-prepend">
 										<span class="input-group-text"><i class="fas fa-user"></i></span>
 									</div>
 									
-									<select id="sexo" class="form-select shadow-none" name="cod_sexo" value="">
-									<option value="" selected> Seleccionar sexo.....</option>
-									@foreach ( $sexos as $sexo )
-										<option value="{{$sexo->cod_sexo}}"
-											{{old('cod_sexo')==$sexo->cod_sexo ? 'selectec' : ''}}
+									<select id="idioma" class="form-select shadow-none" name="cod_idioma" value="">
+									<option value="" selected> Seleccionar Idioma.....</option>
+									@foreach ( $idiomas as $idioma )
+										<option value="{{$idioma->cod_idioma}}"
+											{{old('cod_idioma')==$idioma->cod_idioma ? 'selectec' : ''}}
 											>
-											{{$sexo->descripcion}}</option>
+											{{$idioma->descripcion}}</option>
 									@endforeach
 								</select>
-									@error('cod_sexo')
-									<small class="text-danger" role="alert">
-										Seleccione un Sexo
-									</small>
-								@enderror
+									
 								</div>
 								<div class="col-md-12" id="form-campo">
                   <button type="submit" class="btn btn-primary">Guardar</button>

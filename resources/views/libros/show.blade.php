@@ -60,8 +60,13 @@
             <div class="card-tittle"><b> Descripcion </b></div>
             <div class="card-text"> {{$libro->descripcion}}</div>
             <div class="card-tittle"><b> Idioma </b></div>
-            <div class="card-text"> {{$libro->idioma->descripcion}}</div>
+            <div class="card-text"> {{$libro->cod_idioma
+                ? 
+                $libro->idioma->descripcion
+                :'no se asigno un idioma'
 
+                        }}</div>
+            
         </div>
         <div class="card-footer text-muted text-center">
             <div class="card-tittle"><b> Fecha publicacion </b></div>

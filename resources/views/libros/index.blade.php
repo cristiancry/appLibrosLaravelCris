@@ -24,7 +24,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
-            <a class="btn btn-primary shadow-none" data-toggle="tooltip" data-placement="top" title="Agregar Autor" href="{{route('autores.create')}}"> 
+            <a class="btn btn-primary shadow-none" data-toggle="tooltip" data-placement="top" title="Agregar Autor" href="{{route('libros.create')}}"> 
                 <i class="fa fa-plus"></i>
             </a>
         </div>
@@ -59,11 +59,11 @@
                                         data-toggle="tooltip" data-placement="top" title="Ver autor">
                                     <i class="fa fa-book fa-fw text-white"></i></a>
                                 </a>
-                                <a href="" class="btn btn-success btn-sm shadow-none" 
+                                <a href="{{route('libros.edit',$libro)}}" class="btn btn-success btn-sm shadow-none" 
                                         data-toggle="tooltip" data-placement="top" title="Editar autor">
                                     <i class="fa fa-pencil fa-fw text-white"></i></a>
                                 </a>
-                                <form action="" method="POST" class="d-inline-block">
+                                <form action="{{route('libros.destroy',$libro)}}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
                                     <button id="delete" name="delete" type="submit" 
