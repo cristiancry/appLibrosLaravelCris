@@ -17,4 +17,8 @@ class Autor extends Model
     {
         return $this->belongsTo(Sexo::class, 'cod_sexo','cod_sexo');
     }
+    public function libro()
+    {
+        return $this->belongsToMany(Libro::class, 'lib_asignar_categoria', 'cod_autor', 'cod_libro');
+    }
 }

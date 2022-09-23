@@ -16,4 +16,12 @@ class Libro extends Model
     {
         return $this->belongsTo(Idioma::class, 'cod_idioma','cod_idioma');
     }
+    public function categoria()
+    {
+        return $this->belongsToMany(Categoria::class, 'lib_asignar_categoria', 'cod_libro', 'cod_categoria');
+    }
+    public function autor()
+    {
+        return $this->belongsToMany(Autor::class, 'lib_asignar_autores', 'cod_libro', 'cod_autor');
+    }
 }

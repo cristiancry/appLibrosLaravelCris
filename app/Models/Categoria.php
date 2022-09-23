@@ -13,4 +13,8 @@ class Categoria extends Model
     protected $fillable= ['titulo'];
     public $timestamps=false;
 
+    public function libro()
+    {
+        return $this->belongsToMany(Libro::class, 'lib_asignar_categoria', 'cod_categoria', 'cod_libro');
+    }
 }
