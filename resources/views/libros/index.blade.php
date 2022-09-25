@@ -44,6 +44,9 @@
                         <th scope="col">Descripcion</th>
                         <th scope="col">Fecha de Publicacion</th>
                         <th scope="col">Idioma</th>
+                     
+                        <th scope="col">Autores</th>
+                        <th scope="col">Categorias</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -79,13 +82,45 @@
                             <td scope="row">{{$libro->descripcion}}</td>
                             <td scope="row">{{$libro->fecha_publicacion}}</td>
                             
+                            
                             <td scope="row">{{
-                                    $libro->cod_idioma
-                                    ? 
-                                    $libro->idioma->descripcion
-                                    :'no se asigno un idioma'
+                                $libro->cod_idioma
+                                ? 
+                                $libro->idioma->descripcion
+                                :'no se asigno un idioma'
 
-                                            }}</td>
+                                        }}</td>
+                                        
+                            <td scope="row">
+                                @if(sizeof($libro->autor) > 0)
+                                    
+                                @foreach ($libro->autor as $autorsin) 
+                                                                      
+                                {{ '- ' .$autorsin->nombrecompleto}}<br>
+                                                     
+                                 @endforeach  
+                                 @else
+                                 {{'sin autores'}}
+                                 @endif               
+                            </td>
+                            <td scope="row">
+                                
+                                @if (sizeof($libro->categoria)>0)
+
+                                    @foreach ($libro->categoria as $categori )
+
+                                    {{'- ' . $categori->titulo}}<br> 
+                                    
+                                    @endforeach
+                                @else
+                                {{'sin categorias'}}
+                                @endif                  
+                                          
+                                    
+                                                     
+                                
+                                                
+                            </td> 
                         </tr>
                         @endforeach
                     </tbody>

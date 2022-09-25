@@ -5,6 +5,8 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Libro;
 use App\Models\Idioma;
+use App\Models\Categoria;
+use App\Models\Autor;
 
 class LibroController extends Controller
 {
@@ -15,7 +17,8 @@ class LibroController extends Controller
      */
     public function index()
     {
-        $libros=Libro::orderBy('cod_libro','ASC')->paginate(5);
+        $libros=Libro::orderBy('cod_libro','ASC')->paginate(8);
+       
         return view('libros.index',['libros'=>$libros]);
     }
 
@@ -27,7 +30,9 @@ class LibroController extends Controller
     public function create()
     {
         $idiomas=Idioma::all();
-        return view('libros.create',['idiomas'=>$idiomas]);
+        $categorias=Categoria::pluck('titulo','cod_categoria');
+        $autores=Autor::pluck('nombrecompleto','cod_autor');//solo extraer lo necesario  (valor,codigo)
+        return view('libros.create',['idiomas'=>$idiomas , 'categorias'=>$categorias, 'autores'=>$autores]);
     }
 
     /**
@@ -43,12 +48,16 @@ class LibroController extends Controller
             'titulo'=>'required|min:3|max:100|unique:lib_libro',
             'descripcion'=>'required|min:3|max:200',
             'fecha_publicacion'=>'required|date|before_or_equal:'. $actual.'',
+            'categorias'=>'required',
+            'autores'=>'required',
+
             /* 'cod_sexo'=>'required', */
             
         ]);
          
-        Libro::create($request->all());
-        
+        $libro=Libro::create($request->all());
+        $libro->categoria()->sync($request->categorias);
+        $libro->autor()->sync($request->autores);
         return redirect()
         ->route('libros.index')
         ->with('success', 'Libro creado exitosamente');
@@ -73,8 +82,12 @@ class LibroController extends Controller
      */
     public function edit(Libro $libro)
     {
+        
         $idiomas=Idioma::all();
-        return view('libros.edit',['libro'=>$libro,'idiomas'=>$idiomas]);
+        $categorias=Categoria::pluck('titulo','cod_categoria');
+        $autores=Autor::pluck('nombrecompleto','cod_autor');
+        return view('libros.edit',['libro'=>$libro,'idiomas'=>$idiomas
+        , 'categorias'=>$categorias, 'autores'=>$autores]);
     }
 
     /**
@@ -91,7 +104,8 @@ class LibroController extends Controller
             'titulo'=>'required|min:3|max:100|unique:lib_libro,titulo,'.$libro->cod_libro. ',cod_libro',
             'descripcion'=>'required|min:3|max:200',
             'fecha_publicacion'=>'required|date',
-            
+            'categorias'=>'required',
+            'autores'=>'required',
             /* 'cod_sexo'=>'required', */
             
         ]);
@@ -106,6 +120,8 @@ class LibroController extends Controller
         }
         
         $libro->update($request->all());
+        $libro->categoria()->sync($request->categorias);
+        $libro->autor()->sync($request->autores);
         
         //return redirect()->route('sexos.index')->with('message', 'Sexo actualizado exitosamente');
         return back()->with('success','libro actualizado exitosamente');

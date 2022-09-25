@@ -18,7 +18,7 @@ class Libro extends Model
     }
     public function categoria()
     {
-        return $this->belongsToMany(Categoria::class, 'lib_asignar_categoria', 'cod_libro', 'cod_categoria');
+        return $this->belongsToMany(Categoria::class, 'lib_asignar_categorias', 'cod_libro', 'cod_categoria');
     }
     public function autor()
     {

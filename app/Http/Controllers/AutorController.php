@@ -47,7 +47,7 @@ class AutorController extends Controller
             /* 'cod_sexo'=>'required', */
             
         ]);
-         $request['nombrecompleto']=$request->nombres."".$request->apellidos;
+         $request['nombrecompleto']=$request->nombres." ".$request->apellidos;
         Autor::create($request->all());
         
         return redirect()
@@ -101,7 +101,7 @@ class AutorController extends Controller
         if($autor->isClean()){   // revisar si lo ingresado no tuvo algun cambio
             return back()->with('warning','debe realizar al menos un cambio para al menos actualizar');
         }
-        $request['nombrecompleto']=$request->nombres."".$request->apellidos;
+        $request['nombrecompleto']=$request->nombres." ".$request->apellidos;
         $autor->update($request->all());
         
         //return redirect()->route('sexos.index')->with('message', 'Sexo actualizado exitosamente');
