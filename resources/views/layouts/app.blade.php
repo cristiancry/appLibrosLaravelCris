@@ -8,13 +8,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    {{-- estilos --}}
+    
+    
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    
 </head>
 <body>
     <div id="app">
@@ -37,19 +40,19 @@
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
                        <li class="navbar-item">
-                        <a class="nav-link" href="{{route("sexos.index")}}">Sexos</a>
+                        <a class="nav-link  {{request()->is('sexos*')  ? 'active':''}}"  href="{{route("sexos.index")}}">Sexos</a>
                         </li>
                         <li class="navbar-item">
-                            <a class="nav-link" href="{{route("idiomas.index")}}">Idiomas</a>
+                            <a class="nav-link {{request()->is('idiomas*') ? 'active':''}}" href="{{route("idiomas.index")}}">Idiomas</a>
                             </li>
                         <li class="navbar-item">
-                            <a class="nav-link" href="{{route("categorias.index")}}">Categorias</a>
+                            <a class="nav-link {{request()->is('categorias*') ? 'active':''}}" href="{{route("categorias.index")}}">Categorias</a>
                         </li>
                         <li class="navbar-item">
-                            <a class="nav-link" href="{{route("autores.index")}}">Autores</a>
+                            <a class="nav-link {{request()->is('autores*') ? 'active':''}}" href="{{route("autores.index")}}">Autores</a>
                         </li>
                         <li class="navbar-item">
-                            <a class="nav-link" href="{{route("libros.index")}}">Libros</a>
+                            <a class="nav-link {{request()->is('libros*') ? 'active':''}}" href="{{route("libros.index")}}">Libros</a>
                         </li>
                     </ul>
                 </div>

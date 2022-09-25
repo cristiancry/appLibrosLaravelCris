@@ -1,0 +1,5 @@
+"php": "^8.0.2"  exacta 8.1.5
+"laravel/framework": "^9.19"
+Composer version 2.4.1
+npm:8.15.0
+node:16.17.0
